@@ -1,0 +1,9 @@
+{
+  "name": "Microservices Auth System",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "auth",
+  "workspaceFolder": "/workspace",
+  "extensions": ["ms-azuretools.vscode-docker", "dbaeumer.vscode-eslint"],
+  "forwardPorts": [4000, 5000, 5432, 6379, 9092],
+  "remoteUser": "node"
+}

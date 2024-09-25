@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Estilos básicos para um design responsivo */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .login-form {
+            background-color: #f3f3f3;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .login-form button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .login-form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-form">
+        <form id="loginForm">
+            <label for="username">Usuário:</label>
+            <input type="text" id="username" placeholder="Nome de usuário ou email">
+
+            <label for="password">Senha:</label>
+            <input type="password" id="password" placeholder="Senha">
+
+            <label>
+                <input type="checkbox" id="remember"> Manter-me conectado
+            </label>
+
+            <button type="submit">Login</button>
+            <a href="#">Esqueci minha senha</a>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch('http://localhost:4000/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            }).then(response => {
+                return response.json();
+            }).then(data => {
+                if (data.token) {
+                    alert('Login bem-sucedido!');
+                    // Redirecionar ou salvar token
+                } else {
+                    alert(data.message);
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
